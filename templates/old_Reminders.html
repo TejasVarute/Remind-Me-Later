@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Remind.Me{% endblock title %}
+
+{% block main %}
+<div class="container">
+    <div class="col-md-12">
+        {% for date, reminder in reminders.items %}
+        <div class="widget widget-reminder">
+            <div class="widget-reminder-header h5">{{ date }}</div>
+            {% for remind in reminder %}
+            <div class="widget-reminder-container">
+                <div class="widget-reminder-time h6">{{ remind.time }}</div>
+                <div class="widget-reminder-divider bg-warning"></div>
+                <div class="widget-reminder-content">
+                    <h4 class="widget-title">{{remind.msg}}</h4><hr>
+                    <div class="widget-desc"><i class="fa fa-map-pin"></i> {{ remind.loc }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}

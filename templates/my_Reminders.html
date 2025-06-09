@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Remind.Me{% endblock title %}
+
+{% block main %}
+<div class="container">
+    <div class="col-md-12">
+        <div class="widget widget-reminder">
+            <div class="widget-reminder-header widget-main-title">Add New Reminder</div>
+            <div class="widget-reminder-container">
+                <button type="button" class="widget-title btn btn-outline-primary border-0" onclick="showForm()"><i class="fa fa-plus"></i></button>
+            </div>
+
+            <div class="col-md-8" id="form">
+                <br>
+                <form class="needs-validation border" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Set Reminder</button>
+                    </div>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        {% for date, reminder in reminders.items %}
+        <div class="widget widget-reminder">
+            <div class="widget-reminder-header h5">{{ date }}</div>
+            {% for remind in reminder %}
+            <div class="widget-reminder-container">
+                <div class="widget-reminder-time h6">{{ remind.time }}</div>
+                <div class="widget-reminder-divider bg-warning"></div>
+                <div class="widget-reminder-content">
+                    <h4 class="widget-title">{{remind.msg}}</h4><hr>
+                    <div class="widget-desc"><i class="fa fa-map-pin"></i> {{ remind.loc }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}
+
+<!-- Notification Script-->
+{% block script %}
+    <script>
+    const reminders = [];
+
+    {% for date, reminder_list in reminders.items %}
+        {% for remind in reminder_list %}
+            reminders.push({
+                msg: "{{ remind.msg|escapejs }}",
+                loc: "{{ remind.loc|escapejs }}",
+                datetime: "{{ remind.datetime }}"  // format: "YYYY-MM-DD HH:MM"
+            });
+        {% endfor %}
+    {% endfor %}
+</script>
+
+<script>
+function showNotification(msg, loc, when) {
+    new Notification("⏰ Reminder (" + when + ")", {
+        body: `${msg} — ${loc}`,
+        icon: "/static/images/reminder_icon.png" // Optional
+    });
+}
+
+function scheduleNotifications() {
+    reminders.forEach(reminder => {
+        const reminderTime = new Date(reminder.datetime.replace(" ", "T")); // Convert to Date object
+
+        const offsets = [
+            { label: "1 hour before", ms: 60 * 60 * 1000 },
+            { label: "30 minutes before", ms: 30 * 60 * 1000 },
+            { label: "10 minutes before", ms: 10 * 60 * 1000 },
+            { label: "on time", ms: 0 }
+        ];
+
+        offsets.forEach(offset => {
+            const triggerTime = new Date(reminderTime.getTime() - offset.ms);
+            const delay = triggerTime.getTime() - Date.now();
+
+            if (delay > 0) {
+                setTimeout(() => {
+                    showNotification(reminder.msg, reminder.loc, offset.label);
+                }, delay);
+            }
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if ("Notification" in window) {
+        if (Notification.permission === "granted") {
+            scheduleNotifications();
+        } else {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    scheduleNotifications();
+                }
+            });
+        }
+    }
+});
+</script>
+{% endblock script %}
