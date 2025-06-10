@@ -50,7 +50,7 @@ Remind-Me-Later/
 ### ⏰ Reminder Functionality
 
 - **Add Reminder**: Through Django’s built-in form UI
-- **View Reminders**: Displayed as Bootstrap cards/widgets
+- **View Reminders**: Displayed as Bootstrap and custom CSS widgets
 - **Upcoming Reminders**: Listed under "My Reminders"
 - **Past Reminders**: Automatically moved to "My Old Reminders" based on date/time
 
