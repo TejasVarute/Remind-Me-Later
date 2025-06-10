@@ -56,7 +56,7 @@ Remind-Me-Later/
 
 ### 🔔 Notifications
 
-- Browser notifications are triggered for upcoming reminders using built-in JavaScript notification APIs.
+- Browser notifications are triggered for upcoming reminders using JavaScript.
 
 ---
 
