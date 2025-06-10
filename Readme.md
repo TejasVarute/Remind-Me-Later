@@ -82,7 +82,7 @@ Remind-Me-Later/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/TejasVarute/Remind-Me-Later.git
+git clone https://github.com/TejasVarute/Remind-Me-Later
 ```
 
 ### 2. Create & activate Virtual Environment
