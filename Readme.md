@@ -63,7 +63,7 @@ Remind-Me-Later/
 ## 🛠 Tech Stack
 
 - **Backend**: Django (Python)
-- **Frontend**: HTML5, Bootstrap 5
+- **Frontend**: HTML5, Bootstrap 5, CSS3, JavaScript
 - **Database**: SQLite (default in Django)
 - **Authentication**: Custom user auth
 - **Notifications**: JavaScript browser notifications
