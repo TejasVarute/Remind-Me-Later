@@ -50,13 +50,13 @@ Remind-Me-Later/
 ### ⏰ Reminder Functionality
 
 - **Add Reminder**: Through Django’s built-in form UI
-- **View Reminders**: Displayed as Bootstrap cards/widgets
+- **View Reminders**: Displayed as Bootstrap and custom CSS widgets
 - **Upcoming Reminders**: Listed under "My Reminders"
 - **Past Reminders**: Automatically moved to "My Old Reminders" based on date/time
 
 ### 🔔 Notifications
 
-- Browser notifications are triggered for upcoming reminders using built-in JavaScript notification APIs.
+- Browser notifications are triggered for upcoming reminders using JavaScript.
 
 ---
 
@@ -82,7 +82,7 @@ Remind-Me-Later/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/remind-me-later.git
+git clone https://github.com/TejasVarute/Remind-Me-Later
 ```
 
 ### 2. Create & activate Virtual Environment
