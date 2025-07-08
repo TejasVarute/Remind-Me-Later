@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import PermissionDenied
 
 # Create your models here.
 class UserData(models.Model):
