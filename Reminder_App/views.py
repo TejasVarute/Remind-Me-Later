@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .form import Form
 from .models import Reminder, PastReminder
 from login.decorators import login_required_custom
-from login.models import UserData
+from login.models import UserData, Developer
 from datetime import datetime
 
 #Custom login required decorator
 @login_required_custom
 def reminder(request):
     user = get_object_or_404(UserData, id=request.session.get('user_id'))
-    context = {'form' : Form, 'user' : user, 'reminders' : {}}
+    context = {'form' : Form, 'user' : user, 'reminders' : {}, 'developer' : Developer.objects.get()}
     
     #GET method for show reminders on webpage
     if request.method == "GET":
@@ -64,7 +64,7 @@ def reminder(request):
 @login_required_custom
 def old_reminder(request):
     user = get_object_or_404(UserData, id=request.session.get('user_id'))
-    context = {'user':user, 'reminders' : {}}
+    context = {'user':user, 'reminders' : {}, 'developer' : Developer.objects.get()}
     
     #Getting all Reminders
     reminders = PastReminder.objects.filter(user=user)
@@ -90,4 +90,4 @@ def old_reminder(request):
 
 #Handling 404 page not found error
 def page_not_found(request, exception):
-    return render(request, '404.html')
+    return render(request, '404.html', {'developer' : Developer.objects.get()})
