@@ -18,11 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 
+from django.urls import re_path
+from django.conf import settings
+from django.views.static import serve
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
     path('', include('Reminder_App.urls')),
     path('', lambda request : redirect('login:login', permanent=False)),
+    
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root' : settings.STATIC_ROOT}),
 ]
 
 handler404 = 'Reminder_App.views.page_not_found'
