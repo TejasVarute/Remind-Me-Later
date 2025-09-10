@@ -27,13 +27,11 @@
 ```bash
 Remind-Me-Later/
 │
-├── env/    # Python virtual environment
 ├── login/  # App for custom user authentication
 ├── Project/    # Django project configuration folder
 ├── Reminder_App/   # Core app handling reminders
 ├── static/ # Static files (CSS/JS)
 ├── templates/  # HTML templates
-├── db.sqlite3  # SQLite database
 ├── manage.py   # Django management script
 ├── requirements.txt    # Project dependencies
 └── README.md   # Project overview (you’re here)
