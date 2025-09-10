@@ -26,7 +26,8 @@ def login(request):
                 request.session['user_id'] = user.id
                 request.session['username'] = user.username
                 return redirect('reminder:my_reminder')
-        except: pass
+        except: 
+            return render(request, 'login.html', context = {"message" : "False Information"})
     return render(request, 'login.html')
 
 def logout(request):
